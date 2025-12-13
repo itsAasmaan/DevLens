@@ -1,0 +1,44 @@
+{
+  "name": "devlens",
+  "version": "1.0.0",
+  "description": "DevLens is a Chrome extension that enhances the native DevTools with advanced debugging, monitoring, and productivity features.",
+  "homepage": "https://github.com/itsAasmaan/DevLens#readme",
+  "bugs": {
+    "url": "https://github.com/itsAasmaan/DevLens/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/itsAasmaan/DevLens.git"
+  },
+  "license": "ISC",
+  "author": "Akash Singh",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "preview": "vite preview",
+    "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0"
+  },
+  "dependencies": {
+    "@tailwindcss/vite": "^4.1.18",
+    "lucide-react": "^0.561.0",
+    "react": "^19.2.3",
+    "react-dom": "^19.2.3",
+    "zustand": "^5.0.9"
+  },
+  "devDependencies": {
+    "@types/chrome": "^0.1.32",
+    "@types/react": "^19.2.7",
+    "@types/react-dom": "^19.2.3",
+    "@typescript-eslint/eslint-plugin": "^8.49.0",
+    "@typescript-eslint/parser": "^8.49.0",
+    "@vitejs/plugin-react": "^5.1.2",
+    "eslint": "^9.39.2",
+    "eslint-plugin-react-hooks": "^7.0.1",
+    "eslint-plugin-react-refresh": "^0.4.24",
+    "tailwindcss": "^4.1.18",
+    "typescript": "^5.9.3",
+    "vite": "^7.2.7"
+  }
+}
