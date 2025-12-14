@@ -16,7 +16,7 @@ const Panel = () => {
     <div className="h-screen flex flex-col bg-devtools-bg text-devtools-text">
       <div className="bg-devtools-panel border-b border-devtools-border px-4 py-3">
         <div className="flex items-center gap-2">
-          <div className="w-8 h-8 bg-devtools-accent rounded flex items-center justify-center text-white font-bold">
+          <div className="w-8 h-8  bg-blue-600 rounded-md flex items-center justify-center text-white font-extrabold text-xl shadow-lg shadow-blue-600/50 bg-devtools-accent">
             DL
           </div>
           <div>
