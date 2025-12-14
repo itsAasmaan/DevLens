@@ -8,9 +8,26 @@ chrome.runtime.onInstalled.addListener((details) => {
       theme: "dark",
       version: "1.0.0",
       firstInstall: Date.now(),
+      consoleEnabled: true,
     });
   } else if (details.reason === "update") {
     console.log("DevLens updated to version", chrome.runtime.getManifest().version);
+  }
+});
+
+const devToolsConnections = new Map<number, chrome.runtime.Port>();
+
+chrome.runtime.onConnect.addListener((port) => {
+  if (port.name.startsWith("devtools-")) {
+    const tabId = parseInt(port.name.split("-")[1]);
+    devToolsConnections.set(tabId, port);
+
+    console.log(`DevTools connected for tab ${tabId}`);
+
+    port.onDisconnect.addListener(() => {
+      devToolsConnections.delete(tabId);
+      console.log(`DevTools disconnected for tab ${tabId}`);
+    });
   }
 });
 
@@ -27,5 +44,21 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
     }
   }
 
+  if (message.type === "CONSOLE_LOG_CAPTURED") {
+    const tabId = sender.tab?.id;
+    if (tabId && devToolsConnections.has(tabId)) {
+      const port = devToolsConnections.get(tabId);
+      port?.postMessage({
+        type: "CONSOLE_LOG",
+        payload: message.payload,
+      });
+    }
+  }
+
+  if (message.type === "DEVTOOLS_CONNECTED") {
+    const tabId = message.tabId;
+    console.log(`DevTools panel connected for tab ${tabId}`);
+    sendResponse({ success: true });
+  }
   return true;
 });
